@@ -1,4 +1,5 @@
 ﻿@using PerfumeStore.WebUI.Models
+@using PerfumeStore.WebUI.HtmlHelpers
 @model PerfumeListViewModel
 
 @{
@@ -7,17 +8,9 @@
 
 @foreach (var p in @Model.Perfumes)
 {
-    <div>
-        <hr />
-        <h3><u>@p.Name</u></h3>
-        <p>@p.Description</p>
-        <p>Longevity - @p.Longevity, Sillage - @p.Sillage</p>
-        <p>Country - @p.Country, Volume - @p.Volume, Gender - @p.Gender</p>
-        <h4>Actual price - @p.Price.ToString("# $")</h4>
-        <hr />
-    </div>
+    @Html.Partial("PerfumeSummary", p)
 }
 
-<div>
+<div class="btn-group pull-right">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new {page = x}))
 </div>

@@ -1,0 +1,25 @@
+﻿@model PerfumeStore.Domain.Entities.Perfume
+
+<div class="well" style="border-color:mintcream;
+                         border-end-end-radius:50px;
+                         border-top-right-radius:50px;
+                         opacity:0.8">
+<h2>
+    <strong><u>@Model.Name</u></strong>
+    <span class="pull-right label label-primary"
+          style="background-color:dimgray;
+                 color:cornsilk;
+                 text-align:center">
+                 @Model.Price.ToString("# $")
+    </span>
+</h2>
+
+<p class="lead" style="text-align:left">@Model.Description<p/>
+<span class="h4" style="color:midnightblue">
+    Longevity - <strong><u>@Model.Longevity</u></strong> |
+    Sillage - <strong><u>@Model.Sillage</u></strong> |
+    Gender - <strong><u>@Model.Gender</u></strong> |
+    Volume - <strong><u>@Model.Volume</u></strong> |
+    Country - <strong><u>@Model.Country</u></strong>
+</span>
+</div>
