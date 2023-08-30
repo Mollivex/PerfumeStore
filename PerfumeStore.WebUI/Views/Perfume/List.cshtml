@@ -1,11 +1,11 @@
-﻿@using PerfumeStore.Domain.Entities
-@model IEnumerable<Perfume>
+﻿@using PerfumeStore.WebUI.Models
+@model PerfumeListViewModel
 
 @{
     ViewBag.Title = "Fragrances";
 }
 
-@foreach (var p in @Model)
+@foreach (var p in @Model.Perfumes)
 {
     <div>
         <hr />
@@ -17,3 +17,7 @@
         <hr />
     </div>
 }
+
+<div>
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new {page = x}))
+</div>
