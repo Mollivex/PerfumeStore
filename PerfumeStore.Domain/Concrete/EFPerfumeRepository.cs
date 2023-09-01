@@ -7,7 +7,7 @@ namespace PerfumeStore.Domain.Concrete
 {
     public class EFPerfumeRepository : IPerfumeRepository
     {
-        readonly EFDbContext context = new EFDbContext();
+         EFDbContext context = new EFDbContext();
 
         public IEnumerable<Perfume> Perfumes
         {

@@ -17,20 +17,52 @@ namespace PerfumeStore.WebUI.Controllers
         {
             this.repository = repo;
         }
-        public ViewResult List(int page = 1)
+
+        public ViewResult List(string houseName,
+                               string category, 
+                               string gender, 
+                               string concentration, 
+                               string country, 
+                               string volume, 
+                               int page = 1)
         {
             PerfumeListViewModel model = new PerfumeListViewModel
             {
                 Perfumes = repository.Perfumes
+                    .Where(h => houseName == null || h.HouseName == houseName)
+                    .Where(p => category == null || p.Category == category)
+                    .Where(g => gender == null || g.Gender == gender)
+                    .Where(c => concentration == null || c.Concentration == concentration)
+                    .Where(ct => country == null || ct.Country == country)
+                    .Where(v => volume == null || v.Volume == volume)
                     .OrderBy(perfume => perfume.PerfumeId)
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize),
+
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
-                    TotalItems = repository.Perfumes.Count()
-                }
+
+                    TotalItems = concentration == null ?
+                                //(houseName == null || category == null || gender == null || concentration == null || country == null || volume == null) ?
+                    repository.Perfumes.Count() :
+                    repository.Perfumes
+                                       //.Where(a => a.HouseName == houseName)
+                                       //.Where(b => b.Category == category)
+                                       //.Where(c => c.Gender == gender)
+                                       .Where(d => d.Concentration == concentration)
+                                       //.Where(f => f.Country == country)
+                                       //.Where(g => g.Volume == volume)
+                                       .Count()
+
+                },
+                CurrentHouseName = houseName,
+                CurrentCategory = category,
+                CurrentGender = gender,
+                CurrentConcentration = concentration,
+                CurrentCountry = country,
+                CurrentVolume = volume
             };
             return View(model);
         }

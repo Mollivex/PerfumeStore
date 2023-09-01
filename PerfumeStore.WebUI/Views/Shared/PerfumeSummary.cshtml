@@ -4,22 +4,41 @@
                          border-end-end-radius:50px;
                          border-top-right-radius:50px;
                          opacity:0.8">
-<h2>
-    <strong><u>@Model.Name</u></strong>
-    <span class="pull-right label label-primary"
-          style="background-color:dimgray;
+    <h2>
+        <strong><u>@Model.HouseName - @Model.PerfumeName</u></strong>
+        <span class="pull-right label label-primary"
+              style="background-color:dimgray;
                  color:cornsilk;
                  text-align:center">
-                 @Model.Price.ToString("# $")
-    </span>
-</h2>
+            @Model.Price.ToString("# $")
+        </span>
+    </h2>
 
-<p class="lead" style="text-align:left">@Model.Description<p/>
-<span class="h4" style="color:midnightblue">
-    Longevity - <strong><u>@Model.Longevity</u></strong> |
-    Sillage - <strong><u>@Model.Sillage</u></strong> |
-    Gender - <strong><u>@Model.Gender</u></strong> |
-    Volume - <strong><u>@Model.Volume</u></strong> |
-    Country - <strong><u>@Model.Country</u></strong>
-</span>
+    <p class="lead" style="text-align:left">@Model.Description<p />
+
+    <ul type="circle">
+        <li>
+            <h4 style="color: midnightblue;">
+                Concentration - <strong style="color:darkslategray"><u>@Model.Concentration</u></strong>
+            </h4>
+        </li>
+        <li>
+            <h4 style="color: midnightblue;">
+                Category - <strong style="color:darkslategray"><u>@Model.Category</u></strong>
+            </h4>
+        </li>
+        <li>
+            <span class="h4" style="color:midnightblue">
+                Longevity - <strong style="color:darkslategray"><u>@Model.Longevity</u></strong> |
+                Sillage - <strong style="color:darkslategray"><u>@Model.Sillage</u></strong> |
+                Gender - <strong style="color:darkslategray"><u>@Model.Gender</u></strong> |
+                Volume - <strong style="color:darkslategray"><u>@Model.Volume</u></strong>
+            </span>
+        </li>
+        <li>
+            <h4 style="color: midnightblue;">
+                Country - <strong style="color:darkslategray"><u>@Model.Country</u></strong>
+            </h4>
+        </li>
+    </ul>
 </div>

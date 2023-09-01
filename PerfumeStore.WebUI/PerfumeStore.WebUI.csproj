@@ -130,6 +130,7 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\PerfumeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -148,6 +149,8 @@
     <Content Include="Views\Perfume\List.cshtml" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Views\Shared\PerfumeSummary.cshtml" />
+    <Content Include="Views\Nav\MenuConcentration.cshtml" />
+    <Content Include="Views\Nav\MenuGender.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

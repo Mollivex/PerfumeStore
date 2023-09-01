@@ -14,7 +14,8 @@
     </div>
     <div class="row panel-body">
         <div id="categories" class="col-xs-2">
-        Here will be content later
+            @Html.Action("MenuConcentration", "Nav")
+            @Html.Action("MenuGender", "Nav")
         </div>
         <div class="col-xs-8">
             @RenderBody()
