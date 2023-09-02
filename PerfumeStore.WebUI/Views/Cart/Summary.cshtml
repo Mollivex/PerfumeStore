@@ -1,12 +1,12 @@
 ﻿@model PerfumeStore.Domain.Entities.Cart
 
-<div class="navbar-right">
+<div class="navbar-right" style="margin-right:20px">
     @Html.ActionLink("Order", "Index", "Cart",
     new { returnUrl = Request.Url.PathAndQuery },
     new { @class = "btn btn-default navbar-btn" })
 </div>
 
-<div class="navbar-text navbar-right">
+<div class="navbar-text navbar-right" style="color:cornsilk">
     <b>Your cart:</b>
     @Model.Lines.Sum(x => x.Quantity) perfumes,
     @Model.ComputeTotalValue().ToString("# $")

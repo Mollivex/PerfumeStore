@@ -1,0 +1,52 @@
+﻿@model PerfumeStore.Domain.Entities.ShippingDetails
+
+@{
+    ViewBag.Title = "Royal Fragrance: Order details";
+}
+
+<h2><strong><u>Order now</u></strong></h2>
+<p>Please, enter your contact details and we will send you the perfumes immediately!</p>
+
+@using (Html.BeginForm())
+{
+    <h3><strong><u>Contact details</u></strong></h3>
+    <div class="form-group">
+
+        <label>Your name:</label>
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+
+        <label>Your Email:</label>
+        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+
+        <label>Your phone number:</label>
+        @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control" })
+    </div>
+
+    @Html.ValidationSummary();
+    <h3><strong><u>Delivery details</u></strong></h3>
+    foreach (var property in ViewData.ModelMetadata.Properties)
+    {
+        if (property.PropertyName != "Name" &&
+            property.PropertyName != "Email" &&
+            property.PropertyName != "PhoneNumber" &&
+            property.PropertyName != "GiftWrap")
+        {
+            <div class="form-group" style="width:60%">
+                <label>@(property.DisplayName ?? property.PropertyName)</label>
+                @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+            </div>
+        }
+    }
+
+    <h3><u>Optional</u></h3>
+    <div class="checkbox">
+        <label>
+            @Html.EditorFor(x => x.GiftWrap)
+            Use gift wrap?
+        </label>
+    </div>
+
+    <div class="text-left">
+        <input class="btn btn-primary" type="submit" value="Process the order" />
+    </div>
+}

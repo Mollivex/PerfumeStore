@@ -1,0 +1,15 @@
+﻿CREATE TABLE Perfumes
+(
+	[PerfumeID] INT NOT NULL PRIMARY KEY IDENTITY,
+	[Name] NVARCHAR(100) NOT NULL,
+	[Concentration] NVARCHAR(50) NOT NULL,
+	[PyramidTopNotes] NVARCHAR(100) NOT NULL,
+	[PyramidMiddleNotes] NVARCHAR(100) NOT NULL,
+	[PyramidBaseNotes] NVARCHAR(100) NOT NULL,
+	[Longevity] NVARCHAR(50) NOT NULL,
+	[Sillage] NVARCHAR(50) NOT NULL,
+	[Gender] NVARCHAR(50) NOT NULL,
+	[Description] NVARCHAR(500) NOT NULL,
+	[Category] NVARCHAR(50) NOT NULL,
+	[Price] DECIMAL(16, 2) NOT NULL
+)

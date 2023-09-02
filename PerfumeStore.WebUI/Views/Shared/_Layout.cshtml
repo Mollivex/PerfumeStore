@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Content/bootstrap.css" rel="stylesheet"/>
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet"/>
+    <link href="~/Content/ErrorStyles.css" rel="stylesheet"/>
     <title>@ViewBag.Title</title>
 </head>
 <body background="~/Content/Images/background1.jpg"
-      style="background-size: cover; 
-             background-attachment:fixed; 
-             background-repeat:no-repeat; 
+      style="background-size: cover;
+             background-attachment:fixed;
+             background-repeat:no-repeat;
              background-position:center">
     <div class="navbar navbar-inverse" role="navigation" style="width:100%">
         <a class="navbar-brand" href="#" style="color:cornsilk">Royal Fragrance - perfumes online store</a>
@@ -27,5 +28,8 @@
             @RenderBody()
         </div>
     </div>
+    <footer class="text-center label-info" style="background-color:transparent; width:100%">
+        <strong><u>© Copyright 2023 by Royal Fragrance Team. All Rights Reserved.</u></strong>
+    </footer>
 </body>
 </html>

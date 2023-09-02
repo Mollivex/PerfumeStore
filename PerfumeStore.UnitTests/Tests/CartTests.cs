@@ -8,6 +8,7 @@ using PerfumeStore.Domain.Abstract;
 using PerfumeStore.WebUI.Controllers;
 using System.Web.Mvc;
 using PerfumeStore.WebUI.Models;
+using System.Diagnostics;
 
 namespace PerfumeStore.UnitTests
 {
@@ -139,7 +140,7 @@ namespace PerfumeStore.UnitTests
             Cart cart = new Cart();
 
             // Arrange - creating controller
-            CartController controller = new CartController(mock.Object);
+            CartController controller = new CartController(mock.Object, null);
 
             // Action - add perfume to the cart
             controller.AddToCart(cart, 1, null);
@@ -166,7 +167,7 @@ namespace PerfumeStore.UnitTests
             Cart cart = new Cart();
 
             // Arrange - creating controller
-            CartController controller = new CartController(mock.Object);
+            CartController controller = new CartController(mock.Object, null);
 
             // Action - adding perfume to cart
             RedirectToRouteResult result = controller.AddToCart(cart, 2, "myUrl");
@@ -187,7 +188,7 @@ namespace PerfumeStore.UnitTests
             Cart cart = new Cart();
 
             // Arrange - creating controller
-            CartController target = new CartController(null);
+            CartController target = new CartController(null,null);
 
             // Action - Index() action method call
             CartIndexViewModel result =
@@ -196,6 +197,63 @@ namespace PerfumeStore.UnitTests
             // Assert
             Assert.AreSame(result.Cart, cart);
             Assert.AreEqual(result.ReturnUrl, "myUrl");
+        }
+
+        [TestMethod]
+        public void Cannot_Chekout_Invalid_ShippingDetails()
+        {
+            // Arrange - creating simulated order processor
+            Mock<IOrderProcessor> mock = new Mock<IOrderProcessor>();
+
+            // Arrange - creating cart with item
+            Cart cart = new Cart();
+            cart.AddItem(new Perfume(), 1);
+
+            // Arrange - creating controller
+            CartController controller = new CartController(null, mock.Object);
+
+            // Arrange - add error in model
+            controller.ModelState.AddModelError("error", "error");
+
+            // Action - trying to checkout
+            ViewResult result = controller.Checkout(cart, new ShippingDetails());
+
+            // Assert - checking that order isn't passed to the processor
+            mock.Verify(m => m.ProcessOrder(It.IsAny<Cart>(), It.IsAny<ShippingDetails>()),
+                Times.Never());
+
+            // Assert - checking that method return default view
+            Assert.AreEqual("", result.ViewName);
+
+            // Assert - checking that invalid model is passed to the view
+            Assert.AreEqual(false, result.ViewData.ModelState.IsValid);
+        }
+
+        [TestMethod]
+        public void Can_Checkout_And_Submit_Order()
+        {
+            // Arrange - creating simulated order processor
+            Mock<IOrderProcessor> mock = new Mock<IOrderProcessor>();
+
+            // Arrange - creating cart with item
+            Cart cart = new Cart();
+            cart.AddItem(new Perfume(), 1);
+
+            // Arrange - creating controller
+            CartController controller = new CartController(null, mock.Object);
+
+            // Action - trying to checkout
+            ViewResult result = controller.Checkout(cart, new ShippingDetails());
+
+            // Assert - checking that order is passed to the processor
+            mock.Verify(m => m.ProcessOrder(It.IsAny<Cart>(), It.IsAny<ShippingDetails>()),
+                Times.Once());
+
+            // Assert - checking that method return view
+            Assert.AreEqual("Completed", result.ViewName);
+
+            // Assert - checking that valid model is passed to the view
+            Assert.AreEqual(true, result.ViewData.ModelState.IsValid);
         }
     }
 }

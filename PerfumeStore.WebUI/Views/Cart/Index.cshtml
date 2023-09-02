@@ -18,7 +18,7 @@
             <th class="text-right">Total price</th>
         </tr>
     </thead>
-    <tbody style="background-color:aliceblue; margin; opacity: 0.85">
+    <tbody style="background-color:aliceblue; opacity:0.85">
         @foreach (var line in Model.Cart.Lines)
          {
             <tr>
@@ -50,6 +50,8 @@
 </table>
 
 <div class="text-left">
-    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue shopping</a>
+    <a class="btn btn-primary" href="@Model.ReturnUrl" style="margin: 5px">Continue shopping</a>
+    <span class="glyphicon glyphicon-shopping-cart" style="font-size:20px; margin:5px"></span>
+    @Html.ActionLink("Checkout", "Checkout", null, new { @class = "btn btn-success" }) 
 </div>
 

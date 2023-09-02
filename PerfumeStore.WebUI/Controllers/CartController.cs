@@ -10,18 +10,36 @@ namespace PerfumeStore.WebUI.Controllers
     public class CartController : Controller
     {
         private readonly IPerfumeRepository repository;
-        public CartController(IPerfumeRepository repo)
+        private readonly IOrderProcessor orderProcessor;
+        public CartController(IPerfumeRepository repo, IOrderProcessor processor)
         {
             this.repository = repo;
+            this.orderProcessor = processor;
+        }  
+
+        public ViewResult Checkout()
+        {
+            return View(new ShippingDetails());
         }
 
-        public ViewResult Index(Cart cart, string returnUrl)
+        [HttpPost]
+        public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
         {
-            return View(new CartIndexViewModel
+            if (cart.Lines.Count() == 0)
             {
-                Cart = cart,
-                ReturnUrl = returnUrl
-            });
+                ModelState.AddModelError("", "Sorry, your cart is empty!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                orderProcessor.ProcessOrder(cart, shippingDetails);
+                cart.Clear();
+                return View("Completed");
+            }
+            else
+            {
+                return View(shippingDetails);
+            }
         }
 
         public RedirectToRouteResult AddToCart(Cart cart, int perfumeId, string returnUrl)
@@ -54,5 +72,14 @@ namespace PerfumeStore.WebUI.Controllers
         {
             return PartialView(cart);
         }
+        public ViewResult Index(Cart cart, string returnUrl)
+        {
+            return View(new CartIndexViewModel
+            {
+                Cart = cart,
+                ReturnUrl = returnUrl
+            });
+        }
+
     }
 }

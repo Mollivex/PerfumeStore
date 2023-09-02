@@ -5,6 +5,7 @@ using PerfumeStore.Domain.Concrete;
 using PerfumeStore.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,6 +35,15 @@ namespace PerfumeStore.WebUI.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IPerfumeRepository>().To<EFPerfumeRepository>();
+
+            EmailSettings emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager
+                        .AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+                .WithConstructorArgument("settings", emailSettings);
         }
     }
 }
