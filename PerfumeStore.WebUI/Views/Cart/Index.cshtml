@@ -1,0 +1,43 @@
+﻿@model PerfumeStore.WebUI.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Royal Fragrance: Cart";
+}
+
+<h2>Your Cart</h2>
+<table class="table" style="width:60%" >
+    <thead style="background-color:aliceblue; opacity:0.8">
+        <tr>
+            <th class="text-center">Number</th>
+            <th class="text-left">Perfume</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Total price</th>
+        </tr>
+    </thead>
+    <tbody style="background-color:aliceblue; margin; opacity: 0.8">
+        @foreach (var line in Model.Cart.Lines)
+         {
+            <tr>
+                <td class="text-center">@line.Quantity</td>
+                <td class="text-left">@line.Perfume.HouseName @line.Perfume.PerfumeName</td>
+                <td class="text-right">@line.Perfume.Price.ToString("# $")</td>
+                <td class="text-right">@((line.Quantity * line.Perfume.Price).ToString("# $"))</td>
+            </tr>
+         }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right"><strong><u>Total:</u></strong></td>
+            <td class="text-right">
+                <strong>
+                     <u>@Model.Cart.ComputeTotalValue().ToString("# $")</u>
+                </strong>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-left">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Continue shopping</a>
+</div>
+

@@ -74,6 +74,7 @@
     <Compile Include="Abstract\IPerfumeRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFPerfumeRepository.cs" />
+    <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Perfume.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
