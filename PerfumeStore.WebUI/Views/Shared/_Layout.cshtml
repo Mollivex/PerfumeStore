@@ -8,14 +8,20 @@
     <title>@ViewBag.Title</title>
 </head>
 <body background="~/Content/Images/background1.jpg"
-      style="background-size: cover; background-position: center">
-    <div class="navbar navbar-inverse" role="navigation">
+      style="background-size: cover; 
+             background-attachment:fixed; 
+             background-repeat:no-repeat; 
+             background-position:center">
+    <div class="navbar navbar-inverse" role="navigation" style="width:100%">
         <a class="navbar-brand" href="#" style="color:cornsilk">Royal Fragrance - perfumes online store</a>
+        @Html.Action("Summary", "Cart")
     </div>
     <div class="row panel-body">
         <div id="categories" class="col-xs-2">
             @Html.Action("MenuConcentration", "Nav")
+            @Html.Action("MenuCategory", "Nav")
             @Html.Action("MenuGender", "Nav")
+            @Html.Action("MenuCountry", "Nav")
         </div>
         <div class="col-xs-8">
             @RenderBody()

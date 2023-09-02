@@ -9,58 +9,50 @@ namespace PerfumeStore.WebUI.Controllers
 {
     public class CartController : Controller
     {
-        public ViewResult Index(string returnUrl)
-        {
-            return View(new CartIndexViewModel
-            {
-                Cart = GetCart(),
-                ReturnUrl = returnUrl
-            });
-        }
-
         private readonly IPerfumeRepository repository;
         public CartController(IPerfumeRepository repo)
         {
             this.repository = repo;
         }
 
-        public RedirectToRouteResult AddToCart(int perfumeId, string returnUrl)
+        public ViewResult Index(Cart cart, string returnUrl)
+        {
+            return View(new CartIndexViewModel
+            {
+                Cart = cart,
+                ReturnUrl = returnUrl
+            });
+        }
+
+        public RedirectToRouteResult AddToCart(Cart cart, int perfumeId, string returnUrl)
         {
             Perfume perfume = repository.Perfumes
                 .FirstOrDefault(g => g.PerfumeId == perfumeId);
 
-            if( perfume != null)
+             if( perfume != null)
             {
-                GetCart().AddItem(perfume, 1);
+                cart.AddItem(perfume, 1);
             }
 
             return RedirectToAction("Index", new { returnUrl });
         }
 
-        public RedirectToRouteResult RemoveFromCart(int perfumeId, string returnUrl)
+        public RedirectToRouteResult RemoveFromCart(Cart cart, int perfumeId, string returnUrl)
         {
             Perfume perfume = repository.Perfumes
                 .FirstOrDefault(g => g.PerfumeId == perfumeId);
 
             if (perfume != null)
             {
-                GetCart().RemoveLines(perfume);
+                cart.RemoveLines(perfume);
             }
 
             return RedirectToAction("Index", new { returnUrl });
         }
 
-        public Cart GetCart()
+        public PartialViewResult Summary(Cart cart)
         {
-            Cart cart = (Cart)Session["Cart"];
-
-            if (cart == null)
-            {
-                cart = new Cart();
-                Session["Cart"] = cart;
-            }
-
-            return cart;
+            return PartialView(cart);
         }
     }
 }

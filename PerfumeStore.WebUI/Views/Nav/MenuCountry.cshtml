@@ -1,0 +1,18 @@
+﻿@model IEnumerable<string>
+
+<h3 style="text-align:center"><u>Country</u></h3>
+
+@foreach (var link in Model)
+{
+    @Html.RouteLink(link, new
+    {
+        controller = "Perfume",
+        action = "List",
+        country = link,
+        page = 1
+    }, new
+    {
+        @class = "btn btn-block btn-default btn-lg"
+            + (link == ViewBag.SelectedCategory ? " btn-primary" : "")
+    })
+}

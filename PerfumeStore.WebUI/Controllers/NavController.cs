@@ -31,6 +31,26 @@ namespace PerfumeStore.WebUI.Controllers
                 .Distinct()
                 .OrderBy(x => x);
             return PartialView(categories);
+        }            
+        public PartialViewResult MenuCategory(string category = null)
+        {
+            ViewBag.SelectedCategory = category;
+
+            IEnumerable<string> categories = repository.Perfumes
+                .Select(perfume => perfume.Category)
+                .Distinct()
+                .OrderBy(x => x);
+            return PartialView(categories);
+        }      
+        public PartialViewResult MenuCountry(string country = null)
+        {
+            ViewBag.SelectedCategory = country;
+
+            IEnumerable<string> categories = repository.Perfumes
+                .Select(perfume => perfume.Country)
+                .Distinct()
+                .OrderBy(x => x);
+            return PartialView(categories);
         }        
     }
 }

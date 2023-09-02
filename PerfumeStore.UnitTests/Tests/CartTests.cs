@@ -3,6 +3,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Collections.Generic;
 using PerfumeStore.Domain.Entities;
+using Moq;
+using PerfumeStore.Domain.Abstract;
+using PerfumeStore.WebUI.Controllers;
+using System.Web.Mvc;
+using PerfumeStore.WebUI.Models;
 
 namespace PerfumeStore.UnitTests
 {
@@ -117,5 +122,80 @@ namespace PerfumeStore.UnitTests
             Assert.AreEqual(cart.Lines.Count(), 0);
         }
 
+        /// <summary>
+        /// Checking adding to cart
+        /// </summary>
+        [TestMethod]
+        public void Can_Add_To_Cart()
+        {
+            // Arrange - creating simulated repository
+            Mock<IPerfumeRepository> mock = new Mock<IPerfumeRepository>();
+            mock.Setup(m => m.Perfumes).Returns(new List<Perfume>
+            {
+                new Perfume {PerfumeId = 1, PerfumeName = "Fragrance1", Category="Cat1"}
+            }.AsQueryable());
+
+            // Arrange - creating cart
+            Cart cart = new Cart();
+
+            // Arrange - creating controller
+            CartController controller = new CartController(mock.Object);
+
+            // Action - add perfume to the cart
+            controller.AddToCart(cart, 1, null);
+
+            // Assert
+            Assert.AreEqual(cart.Lines.Count(), 1);
+            Assert.AreEqual(cart.Lines.ToList()[0].Perfume.PerfumeId, 1);
+        }
+
+        /// <summary>
+        /// After adding perfume to the cart, it goes to the cart screen
+        /// </summary>
+        [TestMethod]
+        public void Adding_Perfume_To_Cart_Goes_To_Cart_Screen()
+        {
+            // Arrange - creating simulated repository
+            Mock<IPerfumeRepository> mock = new Mock<IPerfumeRepository>();
+            mock.Setup(m => m.Perfumes).Returns(new List<Perfume>
+            {
+                new Perfume {PerfumeId = 1, PerfumeName = "Fragrance1", Category="Cat1"}
+            }.AsQueryable());
+
+            // Arrange - creating cart
+            Cart cart = new Cart();
+
+            // Arrange - creating controller
+            CartController controller = new CartController(mock.Object);
+
+            // Action - adding perfume to cart
+            RedirectToRouteResult result = controller.AddToCart(cart, 2, "myUrl");
+
+            // Assert
+            Assert.AreEqual(result.RouteValues["action"], "Index");
+            Assert.AreEqual(result.RouteValues["returnUrl"], "myUrl");
+        }
+
+
+        /// <summary>
+        /// Checking URL
+        /// </summary>
+        [TestMethod]
+        public void Can_View_Cart_Contents()
+        {
+            // Arrange - creating cart
+            Cart cart = new Cart();
+
+            // Arrange - creating controller
+            CartController target = new CartController(null);
+
+            // Action - Index() action method call
+            CartIndexViewModel result =
+                (CartIndexViewModel)target.Index(cart, "myUrl").ViewData.Model;
+
+            // Assert
+            Assert.AreSame(result.Cart, cart);
+            Assert.AreEqual(result.ReturnUrl, "myUrl");
+        }
     }
 }

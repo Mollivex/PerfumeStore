@@ -4,17 +4,21 @@
     ViewBag.Title = "Royal Fragrance: Cart";
 }
 
+<style>
+    #cartTable td{ vertical-align:middle; }
+</style>
+
 <h2>Your Cart</h2>
-<table class="table" style="width:60%" >
+<table id="cartTable" class="table" style="width:60%">
     <thead style="background-color:aliceblue; opacity:0.8">
         <tr>
-            <th class="text-center">Number</th>
-            <th class="text-left">Perfume</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-left">Perfume name</th>
             <th class="text-right">Price</th>
             <th class="text-right">Total price</th>
         </tr>
     </thead>
-    <tbody style="background-color:aliceblue; margin; opacity: 0.8">
+    <tbody style="background-color:aliceblue; margin; opacity: 0.85">
         @foreach (var line in Model.Cart.Lines)
          {
             <tr>
@@ -22,6 +26,14 @@
                 <td class="text-left">@line.Perfume.HouseName @line.Perfume.PerfumeName</td>
                 <td class="text-right">@line.Perfume.Price.ToString("# $")</td>
                 <td class="text-right">@((line.Quantity * line.Perfume.Price).ToString("# $"))</td>
+                <td class="text-center">
+                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                {
+                    @Html.Hidden("PerfumeId", line.Perfume.PerfumeId)
+                    @Html.HiddenFor(x => x.ReturnUrl)
+                    <button class="btn btn-sm btn-warning glyphicon glyphicon-trash" type="submit"></button>
+                }
+                </td>
             </tr>
          }
     </tbody>
