@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Tests\AdminTests.cs" />
     <Compile Include="Tests\CartTests.cs" />
     <Compile Include="Tests\PerfumeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
