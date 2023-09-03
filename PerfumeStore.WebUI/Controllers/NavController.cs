@@ -20,7 +20,8 @@ namespace PerfumeStore.WebUI.Controllers
                 .Select(perfume => perfume.Concentration)
                 .Distinct()
                 .OrderBy(x => x);
-            return PartialView(categories);
+
+            return PartialView("FlexMenuConcentration", categories);
         }           
         public PartialViewResult MenuGender(string gender = null)
         {
@@ -30,7 +31,8 @@ namespace PerfumeStore.WebUI.Controllers
                 .Select(perfume => perfume.Gender)
                 .Distinct()
                 .OrderBy(x => x);
-            return PartialView(categories);
+
+            return PartialView("FlexMenuGender", categories);
         }            
         public PartialViewResult MenuCategory(string category = null)
         {
@@ -40,7 +42,8 @@ namespace PerfumeStore.WebUI.Controllers
                 .Select(perfume => perfume.Category)
                 .Distinct()
                 .OrderBy(x => x);
-            return PartialView(categories);
+
+            return PartialView("FlexMenuCategory", categories);
         }      
         public PartialViewResult MenuCountry(string country = null)
         {
@@ -50,7 +53,8 @@ namespace PerfumeStore.WebUI.Controllers
                 .Select(perfume => perfume.Country)
                 .Distinct()
                 .OrderBy(x => x);
-            return PartialView(categories);
+
+            return PartialView("FlexMenuCountry", categories);
         }        
     }
 }

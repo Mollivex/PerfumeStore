@@ -7,29 +7,52 @@
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet"/>
     <link href="~/Content/ErrorStyles.css" rel="stylesheet"/>
     <title>@ViewBag.Title</title>
+    <style>
+        .navbar-right{
+            float: right !important;
+            margin-right:15px;
+            margin-left:15px;
+        }
+    </style>
 </head>
 <body background="~/Content/Images/background1.jpg"
       style="background-size: cover;
              background-attachment:fixed;
              background-repeat:no-repeat;
              background-position:center">
+
     <div class="navbar navbar-inverse" role="navigation" style="width:100%">
-        <a class="navbar-brand" href="#" style="color:cornsilk">Royal Fragrance - perfumes online store</a>
+        <a class="navbar-brand" href="#" style="color:cornsilk">
+            <span class="hidden-xs" style="margin-top:15px; 
+                                           font-size:20px">
+                Royal Fragrance - perfumes online store
+            </span>
+            <div class="visible-xs">Royal</div>
+            <div class="visible-xs">Fragrance</div>
+        </a>
         @Html.Action("Summary", "Cart")
     </div>
+
+    <div class="visible-xs">
+        @Html.Action("MenuConcentration", "Nav", new { horizontalNav = true })
+        @Html.Action("MenuCategory", "Nav", new { horizontalNav = true })
+        @Html.Action("MenuGender", "Nav", new { horizontalNav = true })
+        @Html.Action("MenuCountry", "Nav", new { horizontalNav = true })
+    </div>
+
     <div class="row panel-body">
-        <div id="categories" class="col-xs-2">
+        <div id="categories" class="col-xs-2 hidden-xs">
             @Html.Action("MenuConcentration", "Nav")
             @Html.Action("MenuCategory", "Nav")
             @Html.Action("MenuGender", "Nav")
             @Html.Action("MenuCountry", "Nav")
         </div>
-        <div class="col-xs-8">
+        <div class="col-xs-12 col-sm-8">
             @RenderBody()
         </div>
     </div>
     <footer class="text-center label-info" style="background-color:transparent; width:100%">
-        <strong><u>© Copyright 2023 by Royal Fragrance Team. All Rights Reserved.</u></strong>
+        <strong><u><i>© Copyright 2023 by Royal Fragrance Team. All Rights Reserved.</i></u></strong>
     </footer>
 </body>
 </html>

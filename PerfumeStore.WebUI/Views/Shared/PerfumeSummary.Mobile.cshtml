@@ -1,0 +1,21 @@
+@model PerfumeStore.Domain.Entities.Perfume
+
+<div data-role="collapsible" data-collapsed="false" data-content-theme="c">
+    <h2>@Model.HouseName @Model.PerfumeName</h2>
+    <div>
+        <div>
+            @Model.Description
+        </div>
+        <div>
+            <strong>(@Model.Price.ToString("# $"))</strong>
+        </div>
+        <div>
+            @using (Html.BeginForm("AddToCart", "Cart"))
+            {
+                @Html.HiddenFor(x => x.PerfumeId)
+                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                <input type="submit" class="btn btn-success" value="To cart" />
+            }
+        </div>
+    </div>
+</div>

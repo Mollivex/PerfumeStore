@@ -1,14 +1,24 @@
 ﻿@model PerfumeStore.Domain.Entities.Cart
 
-<div class="navbar-right" style="margin-right:20px">
+<div class="navbar-right hidden-xs" style="margin-right:25px; margin-top:15px">
     @Html.ActionLink("Order", "Index", "Cart",
     new { returnUrl = Request.Url.PathAndQuery },
     new { @class = "btn btn-default navbar-btn" })
 </div>
 
+<div class="navbar-right visible-xs">
+    <a href=@Url.Action("Index", "Cart", new { returnUrl = Request.Url.PathAndQuery })
+       class="btn btn-default navbar-btn"
+       style="margin-top:18px">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+    </a>*-
+</div>
+
 <div class="navbar-text navbar-right" style="color:cornsilk">
-    <b>Your cart:</b>
-    @Model.Lines.Sum(x => x.Quantity) perfumes,
-    @Model.ComputeTotalValue().ToString("# $")
+    <b class="hidden-xs">Your cart:</b>
+    <div style="margin-top:10px">
+        @Model.Lines.Sum(x => x.Quantity) perfumes,
+        @Model.ComputeTotalValue().ToString("# $")
+    </div>
 </div>
 

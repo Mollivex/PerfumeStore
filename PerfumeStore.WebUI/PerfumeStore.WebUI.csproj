@@ -153,14 +153,20 @@
     <Content Include="Views\Perfume\List.cshtml" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Views\Shared\PerfumeSummary.cshtml" />
-    <Content Include="Views\Nav\MenuConcentration.cshtml" />
-    <Content Include="Views\Nav\MenuGender.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
-    <Content Include="Views\Nav\MenuCategory.cshtml" />
-    <Content Include="Views\Nav\MenuCountry.cshtml" />
     <Content Include="Views\Cart\Summary.cshtml" />
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\Completed.cshtml" />
+    <Content Include="Views\Nav\FlexMenuCategory.cshtml" />
+    <Content Include="Views\Nav\FlexMenuConcentration.cshtml" />
+    <Content Include="Views\Nav\FlexMenuGender.cshtml" />
+    <Content Include="Views\Nav\FlexMenuCountry.cshtml" />
+    <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
+    <Content Include="Views\Nav\FlexMenuConcentration.Mobile.cshtml" />
+    <Content Include="Views\Nav\FlexMenuCategory.Mobile.cshtml" />
+    <Content Include="Views\Nav\FlexMenuCountry.Mobile.cshtml" />
+    <Content Include="Views\Nav\FlexMenuGender.Mobile.cshtml" />
+    <Content Include="Views\Shared\PerfumeSummary.Mobile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
