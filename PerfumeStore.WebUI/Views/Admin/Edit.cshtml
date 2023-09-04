@@ -1,0 +1,59 @@
+﻿@model PerfumeStore.Domain.Entities.Perfume
+
+@{
+    ViewBag.Title = "Admin panel: Edit item";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel" style="background-color:transparent">
+
+    <div class="navbar navbar-inverse">
+        <h4 style="color:cornsilk; margin:15px"><u><strong>Edit perfume "@Model.HouseName @Model.PerfumeName"</strong></u></h4>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="panel-body">
+            @Html.HiddenFor(m => m.PerfumeId)
+
+            @foreach (var property in ViewData.ModelMetadata.Properties)
+            {
+                if (property.PropertyName != "PerfumeId")
+                {
+                    <div class="form-group" style="font-size:20px">
+                        <ul>
+                            <li>
+                                <label style="text-decoration: underline">@(property.DisplayName ?? property.PropertyName)</label>
+                            </li>
+                        </ul>
+                        @if (property.PropertyName == "Description")
+                        {
+                            @Html.TextArea(property.PropertyName, null,
+                                new { @class = "form-control", rows = 5 })
+                        }
+                        else
+                        {
+                            @Html.TextBox(property.PropertyName, null,
+                                new { @class = "form-control" })
+                        }
+
+                        @Html.ValidationMessage(property.PropertyName)
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="panel-footer navbar-inverse">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancel changes and return to the list", "Index", null, new
+               {
+                    @class = "btn btn-default"
+               })
+        </div>
+    }
+</div>
+
+<footer class="text-center label-info" style="background-color:transparent; width:100%">
+    <strong><u><i>© Copyright 2023 by Royal Fragrance Team. All Rights Reserved.</i></u></strong>
+</footer>
+

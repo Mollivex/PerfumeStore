@@ -10,5 +10,6 @@ namespace PerfumeStore.Domain.Abstract
     public interface IPerfumeRepository
     {
         IEnumerable<Perfume> Perfumes { get; }
+        void SavePerfume(Perfume perfume);
     }
 }
