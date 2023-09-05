@@ -3,6 +3,8 @@ using Ninject;
 using PerfumeStore.Domain.Abstract;
 using PerfumeStore.Domain.Concrete;
 using PerfumeStore.Domain.Entities;
+using PerfumeStore.WebUI.Infrastructure.Abstract;
+using PerfumeStore.WebUI.Infrastructure.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -44,6 +46,8 @@ namespace PerfumeStore.WebUI.Infrastructure
 
             kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
                 .WithConstructorArgument("settings", emailSettings);
+
+            kernel.Bind<IAuthProvider>().To<FormAuthProvider>();
         }
     }
 }

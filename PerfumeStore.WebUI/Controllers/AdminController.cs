@@ -1,13 +1,11 @@
 ﻿using PerfumeStore.Domain.Abstract;
 using PerfumeStore.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PerfumeStore.WebUI.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         readonly IPerfumeRepository repository;
