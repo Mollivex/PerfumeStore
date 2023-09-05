@@ -138,5 +138,32 @@ namespace PerfumeStore.UnitTests
             // Assert - checking method result type
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
+
+        [TestMethod]
+        public void Can_Delete_Valid_Game()
+        {
+            // Arrange - creating Perfume object
+            Perfume perfume = new Perfume { PerfumeId = 2, PerfumeName = "Fragrance2" };
+
+            // Arrange - creating simulated repository
+            Mock<IPerfumeRepository> mock = new Mock<IPerfumeRepository>();
+            mock.Setup(m => m.Perfumes).Returns(new List<Perfume>
+            {
+                new Perfume { PerfumeId = 1, PerfumeName = "Fragrance1"},
+                new Perfume { PerfumeId = 2, PerfumeName = "Fragrance2"},
+                new Perfume { PerfumeId = 3, PerfumeName = "Fragrance3"},
+                new Perfume { PerfumeId = 4, PerfumeName = "Fragrance4"},
+                new Perfume { PerfumeId = 5, PerfumeName = "Fragrance5"}
+            });
+
+            // Arrange - creating controller
+            AdminController controller = new AdminController(mock.Object);
+
+            // Action - delete perfume
+            controller.Delete(perfume.PerfumeId);
+
+            // Assert - checking which store delete method appears for the correct Perfume object
+            mock.Verify(m => m.DeletePerfume(perfume.PerfumeId));
+        }
     }
 }

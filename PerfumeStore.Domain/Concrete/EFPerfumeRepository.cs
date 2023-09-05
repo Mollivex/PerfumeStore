@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using PerfumeStore.Domain.Entities;
 using PerfumeStore.Domain.Abstract;
-using PerfumeStore.Domain.Concrete;
-using System.Data.Entity.Infrastructure;
 
 namespace PerfumeStore.Domain.Concrete
 {
@@ -17,7 +15,7 @@ namespace PerfumeStore.Domain.Concrete
 
         public void SavePerfume(Perfume perfume)
         {
-            if(perfume == null)
+            if (perfume.PerfumeId == 0)
                 context.Perfumes.Add(perfume);
             else
             {
@@ -41,6 +39,17 @@ namespace PerfumeStore.Domain.Concrete
                 }
             }
             context.SaveChanges();
+        }
+
+        public Perfume DeletePerfume(int PerfumeId)
+        {
+            Perfume dbEntry = context.Perfumes.Find(PerfumeId);
+            if (dbEntry != null)
+            {
+                context.Perfumes.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
         }
     }
 }

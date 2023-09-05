@@ -11,5 +11,6 @@ namespace PerfumeStore.Domain.Abstract
     {
         IEnumerable<Perfume> Perfumes { get; }
         void SavePerfume(Perfume perfume);
+        Perfume DeletePerfume(int PerfumeId);
     }
 }

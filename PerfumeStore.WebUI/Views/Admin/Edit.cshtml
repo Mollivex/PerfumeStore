@@ -11,7 +11,7 @@
         <h4 style="color:cornsilk; margin:15px"><u><strong>Edit perfume "@Model.HouseName @Model.PerfumeName"</strong></u></h4>
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Edit", "Admin"))
     {
         <div class="panel-body">
             @Html.HiddenFor(m => m.PerfumeId)
@@ -37,7 +37,7 @@
                                 new { @class = "form-control" })
                         }
 
-                        @Html.ValidationMessage(property.PropertyName)
+                   `     @Html.ValidationMessage(property.PropertyName)
                     </div>
                 }
             }

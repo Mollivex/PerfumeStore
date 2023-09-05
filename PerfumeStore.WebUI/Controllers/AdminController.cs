@@ -45,5 +45,22 @@ namespace PerfumeStore.WebUI.Controllers
                 return View(perfume);
             }
         }
+
+        public ViewResult Create()
+        {
+            return View("Edit", new Perfume());
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int perfumeId)
+        {
+            Perfume deletedPerfume = repository.DeletePerfume(perfumeId);
+            if (deletedPerfume != null)
+            {
+                TempData["message"] = string.Format("Perfume \"{0} {1}\" was deleted",
+                    deletedPerfume.HouseName, deletedPerfume.PerfumeName);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
