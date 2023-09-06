@@ -2,6 +2,7 @@
 using PerfumeStore.Domain.Entities;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web;
 
 namespace PerfumeStore.WebUI.Controllers
 {
@@ -29,10 +30,16 @@ namespace PerfumeStore.WebUI.Controllers
 
         // Overloaded Edit() method version for saving changes
         [HttpPost]
-        public ActionResult Edit(Perfume perfume)
+        public ActionResult Edit(Perfume perfume, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    perfume.ImageMimeType = image.ContentType;
+                    perfume.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(perfume.ImageData, 0, image.ContentLength);
+                }
                 repository.SavePerfume(perfume);
                 TempData["message"] = string.Format("Changes in perfume \"{0} {1}\" was saved", perfume.HouseName, perfume.PerfumeName);
                 return RedirectToAction("Index");

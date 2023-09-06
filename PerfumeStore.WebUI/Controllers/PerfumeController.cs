@@ -66,5 +66,19 @@ namespace PerfumeStore.WebUI.Controllers
             };
             return View(model);
         }
+        public FileContentResult GetImage(int perfumeId)
+        {
+            Perfume perfume = repository.Perfumes
+                .FirstOrDefault(g => g.PerfumeId == perfumeId);
+
+            if (perfume != null)
+            {
+                return File(perfume.ImageData, perfume.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

@@ -99,6 +99,7 @@
     <Compile Include="Tests\PerfumeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AdminSecurityTests.cs" />
+    <Compile Include="Tests\ImageTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

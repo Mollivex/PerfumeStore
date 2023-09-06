@@ -1,0 +1,3 @@
+﻿ALTER TABLE Perfumes
+		ADD ImageData		VARBINARY(MAX)	NULL,
+			ImageMimeType	VARCHAR(50)		NULL

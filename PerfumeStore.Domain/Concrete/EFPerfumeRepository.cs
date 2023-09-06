@@ -36,6 +36,8 @@ namespace PerfumeStore.Domain.Concrete
                     dbEntry.Country = perfume.Country;
                     dbEntry.Volume = perfume.Volume;
                     dbEntry.Price = perfume.Price;
+                    dbEntry.ImageData = perfume.ImageData;
+                    dbEntry.ImageMimeType = perfume.ImageMimeType;
                 }
             }
             context.SaveChanges();

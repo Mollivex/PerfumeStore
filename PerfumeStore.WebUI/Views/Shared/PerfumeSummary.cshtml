@@ -4,6 +4,16 @@
                          border-end-end-radius:50px;
                          border-top-right-radius:50px;
                          opacity:0.85">
+
+    @if (Model.ImageData != null)
+    {
+        <div class="pull-left" style="margin-right: 10px">
+            <img class="img-thumbnail" width="300" height="300"
+                 src="@Url.Action("GetImage", "Perfume",
+                new { Model.PerfumeId })" />
+        </div>
+    }
+
     <h2>
         <strong><u>@Model.HouseName - @Model.PerfumeName</u></strong>
         <span class="pull-right label label-primary"
@@ -19,14 +29,14 @@
         <div class="pull-right">
             @Html.HiddenFor(x => x.PerfumeId)
             @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
-            
+
             <button type="submit" class="btn btn-default">
-            <span class="glyphicon glyphicon-shopping-cart" 
-                  style="color:darkslategrey;
+                <span class="glyphicon glyphicon-shopping-cart"
+                      style="color:darkslategrey;
                   font-size:15px;
                   padding:1px;
                   margin:1px"></span>
-            Add to cart   
+                Add to cart
             </button>
         </div>
     }
@@ -52,12 +62,12 @@
         </li>
         <li>
             <h4 style="color:midnightblue">
-            Gender - <strong style="color:darkslategray"><u>@Model.Gender</u></strong>
+                Gender - <strong style="color:darkslategray"><u>@Model.Gender</u></strong>
             </h4>
-        </li>       
+        </li>
         <li>
             <h4 style="color:midnightblue">
-            Volume - <strong style="color:darkslategray"><u>@Model.Volume</u></strong>
+                Volume - <strong style="color:darkslategray"><u>@Model.Volume</u></strong>
             </h4>
         </li>
         <li>
